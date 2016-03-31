@@ -1,3 +1,10 @@
 <resources>
-    <string name="app_name">A8</string>
+    <string name="app_name">Note Taker</string>
+
+    <!-- Main Activity -->
+    <string name="buttonAdd">Add</string>
+
+
+    <!-- list_item.xml<string name="defaultNote">Note</string>
+    <string name="defaultDate">1/1/11</string>
 </resources>
