@@ -5,6 +5,14 @@
     <string name="buttonAdd">Add</string>
 
 
-    <!-- list_item.xml<string name="defaultNote">Note</string>
+    <!-- list_item.xml -->
+    <string name="defaultNote">Note</string>
     <string name="defaultDate">1/1/11</string>
+
+    <!-- note_edit_activity.xml -->
+    <string name="textTitle">Title</string>
+    <string name="textSaveNote">Save Note</string>
+    <string name="textDeleteNote">Delete Note</string>
+    <string name="editTextDescriptionPlaceholder">Enter your note here.</string>
+
 </resources>

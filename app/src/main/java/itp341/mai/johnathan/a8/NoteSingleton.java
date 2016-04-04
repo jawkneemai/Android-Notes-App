@@ -45,5 +45,9 @@ public class NoteSingleton {
         mNoteList.add(note);
     }
 
+    // Remove a note from the list
+    public void removeNote(int index) {
+        mNoteList.remove(index);
+    }
 
 }

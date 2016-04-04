@@ -178,6 +178,7 @@
     <dimen name="notification_large_icon_height">64dp</dimen>
     <dimen name="notification_large_icon_width">64dp</dimen>
     <dimen name="notification_subtext_size">12dp</dimen>
+    <dimen name="widget_spacing">8dp</dimen>
     <drawable name="notification_template_icon_bg">#3333B5E5</drawable>
     <item name="action_bar_activity_content" type="id"/>
     <item name="action_bar_spinner" type="id"/>
@@ -212,8 +213,15 @@
     <string name="abc_shareactionprovider_share_with">Share with</string>
     <string name="abc_shareactionprovider_share_with_application">Share with %s</string>
     <string name="abc_toolbar_collapse_description">Collapse</string>
-    <string name="app_name">A8</string>
+    <string name="app_name">Note Taker</string>
+    <string name="buttonAdd">Add</string>
+    <string name="defaultDate">1/1/11</string>
+    <string name="defaultNote">Note</string>
+    <string name="editTextDescriptionPlaceholder">Enter your note here.</string>
     <string name="status_bar_notification_info_overflow">999+</string>
+    <string name="textDeleteNote">Delete Note</string>
+    <string name="textSaveNote">Save Note</string>
+    <string name="textTitle">Title</string>
     <style name="AlertDialog.AppCompat" parent="Base.AlertDialog.AppCompat"/>
     <style name="AlertDialog.AppCompat.Light" parent="Base.AlertDialog.AppCompat.Light"/>
     <style name="Animation.AppCompat.Dialog" parent="Base.Animation.AppCompat.Dialog"/>
