@@ -21,6 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="itp341.mai.johnathan.a8.NoteEditActivity" />
     </application>
 
 </manifest>

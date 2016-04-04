@@ -1,6 +1,8 @@
 package itp341.mai.johnathan.a8;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -20,8 +22,12 @@ public class NoteListActivity extends AppCompatActivity {
     Button mButtonAdd;
     ListView mListViewNotes;
 
+    // Data
     ArrayList<Note> mNoteList;
     ArrayAdapter<Note> itemsAdapter;
+
+    // Constants
+    static final int requestCodeAddNote = 1;
 
 
     @Override
@@ -39,10 +45,24 @@ public class NoteListActivity extends AppCompatActivity {
         itemsAdapter = new ArrayAdapter<Note>(this, R.layout.list_item, R.id.simpleListItemNote, mNoteList);
         mListViewNotes.setAdapter(itemsAdapter);
 
+        mButtonAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), NoteEditActivity.class);
+                startActivityForResult(i, requestCodeAddNote);
+            }
+        });
+    }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
+        if (resultCode == requestCodeAddNote) {
+            if (resultCode == Activity.RESULT_OK) { // If note was added succesfully, refresh list
 
-
+            } else if (resultCode == Activity.RESULT_CANCELED) {} // else don't have to do anything.
+        }
     }
 }
 
