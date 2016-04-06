@@ -2,12 +2,13 @@ package itp341.mai.johnathan.a8;
 
 
 import java.util.Calendar;
+import java.util.Date;
 
 public class Note {
 
     private String mTitle;
     private String mContent;
-    private Calendar mDate;
+    private Date mDate;
 
     public Note() {
         mTitle = "";
@@ -15,7 +16,7 @@ public class Note {
         mDate = null;
     }
 
-    public Note(String title, String content, Calendar date) {
+    public Note(String title, String content, Date date) {
         mTitle = title;
         mContent = content;
         mDate = date;
@@ -38,11 +39,11 @@ public class Note {
         return mContent;
     }
 
-    public void setDate(Calendar date) {
+    public void setDate(Date date) {
         mDate = date;
     }
 
-    public Calendar getDate() {
+    public Date getDate() {
         return mDate;
     }
 

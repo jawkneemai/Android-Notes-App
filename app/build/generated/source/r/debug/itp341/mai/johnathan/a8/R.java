@@ -1649,6 +1649,7 @@ containing a value of this type.
         public static final int listViewNotes=0x7f0c0055;
         public static final int list_item=0x7f0c0028;
         public static final int media_actions=0x7f0c005b;
+        public static final int menuDeleteNote=0x7f0c0065;
         public static final int middle=0x7f0c001a;
         public static final int multiply=0x7f0c0013;
         public static final int never=0x7f0c001e;
@@ -1747,6 +1748,9 @@ containing a value of this type.
         public static final int select_dialog_multichoice_material=0x7f040025;
         public static final int select_dialog_singlechoice_material=0x7f040026;
         public static final int support_simple_spinner_dropdown_item=0x7f040027;
+    }
+    public static final class menu {
+        public static final int context_menu=0x7f0d0000;
     }
     public static final class mipmap {
         public static final int ic_launcher=0x7f030000;

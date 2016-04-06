@@ -18,8 +18,8 @@ public class NoteSingleton {
     private NoteSingleton(Context c) {
         mAppContext = c;
         mNoteList = new ArrayList<Note>();
-        mNoteList.add(new Note("Welcome to Note Taker!", "Take notes anywhere.", Calendar.getInstance()));
-        mNoteList.add(new Note("Created by Johnathan Mai.", "ITP361.", Calendar.getInstance()));
+        mNoteList.add(new Note("Welcome to Note Taker!", "Take notes anywhere.", Calendar.getInstance().getTime()));
+        mNoteList.add(new Note("Created by Johnathan Mai.", "ITP361.", Calendar.getInstance().getTime()));
     }
 
     // Singleton Getter

@@ -6,7 +6,10 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.ContextMenu;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -18,6 +21,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.Formatter;
 
 public class NoteListActivity extends AppCompatActivity {
@@ -52,6 +56,7 @@ public class NoteListActivity extends AppCompatActivity {
         mNoteList = NoteSingleton.get(getApplicationContext()).getNoteList();
         itemsAdapter = new ArrayAdapter<Note>(this, R.layout.list_item, R.id.simpleListItemNote, mNoteList);
         mListViewNotes.setAdapter(itemsAdapter);
+        registerForContextMenu(mListViewNotes);
 
 
         mButtonAdd.setOnClickListener(new View.OnClickListener() {
@@ -81,9 +86,13 @@ public class NoteListActivity extends AppCompatActivity {
         if (resultCode == Activity.RESULT_OK) {
             if (requestCode == requestCodeAddNote || requestCode == requestCodeEditNote) { // If note was added succesfully, refresh list
                 // Creating new Note Object
-                Log.d(TAG, "hi");
                 Note temp = new Note();
-                Calendar c = Calendar.getInstance();
+
+                // Calendar
+                Date c = Calendar.getInstance().getTime();
+                Log.d(TAG, String.valueOf(c));
+
+                // Inserting new Note into model
                 temp.setTitle(data.getStringExtra(EXTRA_TEMPNOTE_TITLE));
                 temp.setContent(data.getStringExtra(EXTRA_TEMPNOTE_BODY));
                 temp.setDate(c);
@@ -96,12 +105,34 @@ public class NoteListActivity extends AppCompatActivity {
             itemsAdapter.notifyDataSetChanged();
         } // else don't have to do anything.
     }
+
+    // Context Menu Delete Methods
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.context_menu, menu);
+    }
+
+    @Override
+    public boolean onContextItemSelected(MenuItem item) {
+        AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) item.getMenuInfo();
+        switch(item.getItemId()) {
+            case R.id.menuDeleteNote:
+                NoteSingleton.get(getApplicationContext()).removeNote(info.position); // info.position gets index of item on listview
+                itemsAdapter.notifyDataSetChanged();
+                return true;
+            default:
+                return super.onContextItemSelected(item);
+        }
+    }
 }
 
 class NoteAdapter extends ArrayAdapter<Note> {
     public NoteAdapter(Context context, ArrayList<Note> notes) {
         super(context, 0, notes);
     }
+    private final String TAG = NoteListActivity.class.getName();
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
@@ -116,7 +147,8 @@ class NoteAdapter extends ArrayAdapter<Note> {
         TextView noteDate = (TextView) convertView.findViewById(R.id.simpleListItemDate);
 
         noteTitle.setText(note.getTitle());
-        noteDate.setText(f.format("%tD", note.getDate()).toString());
+        Log.d(TAG, note.getDate().toString());
+        noteDate.setText(note.getDate().toString());
 
         return convertView;
     }
