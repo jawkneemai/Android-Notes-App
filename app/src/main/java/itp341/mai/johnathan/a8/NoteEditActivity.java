@@ -1,6 +1,7 @@
 package itp341.mai.johnathan.a8;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -17,6 +18,9 @@ public class NoteEditActivity extends AppCompatActivity {
     Button mButtonSaveNote;
     Button mButtonDeleteNote;
 
+    // Constants
+    public static final String EXTRA_ITEMPOSITION = "itp341.mai.johnathan.a6.itemposition";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -29,27 +33,33 @@ public class NoteEditActivity extends AppCompatActivity {
         mButtonSaveNote = (Button) findViewById(R.id.buttonSaveNote);
         mButtonDeleteNote = (Button) findViewById(R.id.buttonDeleteNote);
 
+        // Retrieve Intent, if there is
+        Intent i = getIntent();
+        int itemPosition = i.getIntExtra(EXTRA_ITEMPOSITION, -1);
+        if (itemPosition != -1) { // if -1, that means this page was accessed by the Add Note button
+            Note note = NoteSingleton.get(getApplicationContext()).getNote(itemPosition);
+            mEditTextTitle.setText(note.getTitle());
+            mEditTextDescription.setText(note.getContent());
+            NoteSingleton.get(getApplicationContext()).removeNote(itemPosition); // Delete here and re-add after edited. this pushes note to most recent position
+        }
+
+
         mButtonSaveNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Creating new Note Object
-                Note temp = new Note();
-                Calendar c = Calendar.getInstance();
-                temp.setTitle(mEditTextTitle.getText().toString());
-                temp.setContent(mEditTextDescription.getText().toString());
-                temp.setDate(c);
-
-                // Add new Note Object to list and end activity
-                NoteSingleton.get(getApplicationContext()).addNote(temp);
-                setResult(Activity.RESULT_OK);
+                Intent newIntent = new Intent();
+                newIntent.putExtra(NoteListActivity.EXTRA_TEMPNOTE_TITLE, mEditTextTitle.getText().toString());
+                newIntent.putExtra(NoteListActivity.EXTRA_TEMPNOTE_BODY, mEditTextDescription.getText().toString());
+                setResult(Activity.RESULT_OK, newIntent);
                 finish();
+
             }
         });
 
         mButtonDeleteNote.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                // Nothing needs to happen when a new note is cancelled.
                 setResult(Activity.RESULT_CANCELED);
                 finish();
             }
